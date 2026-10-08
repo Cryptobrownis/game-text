@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Malam di Ambang Hasrat</title>
+    <title>Malam Gelora & Tantangan Intim</title>
     <style>
         :root {
-            --bg-color: #0d0914;
-            --card-bg: #181124;
-            --accent-color: #e91e63;
-            --text-color: #ece6f0;
-            --text-muted: #9a8c9e;
-            --btn-terima: #2e7d32;
-            --btn-tolak: #c62828;
-            --btn-hover: #371d45;
+            --bg-color: #07040a;
+            --card-bg: #130a17;
+            --accent-red: #ff0055;
+            --accent-purple: #8e24aa;
+            --text-light: #f5eef8;
+            --text-muted: #a38ea9;
+            --btn-terima: rgba(46, 125, 50, 0.35);
+            --btn-tolak: rgba(198, 40, 40, 0.35);
+            --border-red: #ff0055;
+            --border-green: #4caf50;
         }
 
         * {
@@ -26,326 +28,363 @@
 
         body {
             background-color: var(--bg-color);
-            color: var(--text-color);
+            color: var(--text-light);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 16px;
+            padding: 10px;
         }
 
-        .container {
+        .game-card {
             width: 100%;
-            max-width: 480px;
+            max-width: 450px;
             background-color: var(--card-bg);
-            border: 1px solid #332042;
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+            border: 1px solid #2d1338;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(255, 0, 85, 0.15);
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            min-height: 82vh;
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 16px;
-            border-bottom: 1px solid #332042;
-            padding-bottom: 12px;
+        .image-container {
+            width: 100%;
+            height: 220px;
+            position: relative;
+            background-color: #000;
         }
 
-        .title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            color: #f48fb1;
-            text-transform: uppercase;
+        .scene-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
-        .subtitle {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-top: 4px;
+        .gradient-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background: linear-gradient(to top, var(--card-bg), transparent);
         }
 
-        .content {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-
-        .scene-title {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #ce93d8;
-            margin-bottom: 12px;
-            text-transform: uppercase;
-        }
-
-        .story-text {
-            font-size: 0.98rem;
-            line-height: 1.6;
-            color: var(--text-color);
-            margin-bottom: 12px;
-            text-align: justify;
-        }
-
-        .response-text {
-            font-size: 0.95rem;
-            line-height: 1.5;
-            color: #ffd54f;
-            background: rgba(255, 213, 79, 0.08);
-            border-left: 3px solid #ffd54f;
-            padding: 10px 12px;
-            border-radius: 4px;
-            margin-top: 10px;
-        }
-
-        .options-container {
+        .content-body {
+            padding: 16px;
             display: flex;
             flex-direction: column;
             gap: 12px;
         }
 
+        .status-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-bottom: 1px solid #2d1338;
+            padding-bottom: 6px;
+        }
+
+        .mood-text {
+            font-weight: bold;
+            color: var(--accent-red);
+        }
+
+        .scene-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--accent-red);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .story-text {
+            font-size: 0.92rem;
+            line-height: 1.6;
+            color: var(--text-light);
+            text-align: justify;
+        }
+
+        .feedback-box {
+            font-size: 0.88rem;
+            line-height: 1.4;
+            padding: 12px;
+            border-radius: 10px;
+            display: none;
+            margin-top: 4px;
+        }
+
+        .fb-happy {
+            background-color: rgba(76, 175, 80, 0.15);
+            border: 1px solid var(--border-green);
+            color: #81c784;
+        }
+
+        .fb-unhappy {
+            background-color: rgba(244, 67, 54, 0.15);
+            border: 1px solid #e57373;
+            color: #ef9a9a;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 6px;
+        }
+
         .btn {
-            background-color: #2a1a35;
-            border: 1px solid #6a1b9a;
-            color: #ffffff;
-            padding: 15px;
+            width: 100%;
+            padding: 14px;
             border-radius: 12px;
-            font-size: 0.95rem;
+            font-size: 0.88rem;
             font-weight: 600;
             text-align: left;
             cursor: pointer;
-            transition: all 0.2s ease;
+            border: 1px solid transparent;
+            color: #fff;
+            transition: transform 0.1s ease;
         }
 
-        .btn-terima {
-            border-color: #4caf50;
+        .btn-accept {
+            background-color: var(--btn-terima);
+            border-color: var(--border-green);
         }
 
-        .btn-tolak {
-            border-color: #ef5350;
+        .btn-reject {
+            background-color: var(--btn-tolak);
+            border-color: #f44336;
+        }
+
+        .btn-next {
+            background-color: var(--accent-purple);
+            border-color: #ab47bc;
+            text-align: center;
         }
 
         .btn:active {
-            transform: scale(0.98);
-        }
-
-        .ending-box {
-            text-align: center;
-            padding: 16px;
-            background: rgba(156, 39, 176, 0.1);
-            border-radius: 12px;
-            border: 1px solid #ab47bc;
-        }
-
-        .ending-type {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #ff80ab;
-            margin-bottom: 10px;
+            transform: scale(0.97);
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="header">
-        <div class="title">Malam di Ambang Hasrat</div>
-        <div class="subtitle" id="progress">Cerita Interaktif</div>
+<div class="game-card">
+    <div class="image-container">
+        <img id="scene-img" class="scene-img" src="" alt="Adegan">
+        <div class="gradient-overlay"></div>
     </div>
 
-    <div class="content" id="game-content">
-        <!-- Konten cerita diisi via JS -->
-    </div>
+    <div class="content-body">
+        <div class="status-header">
+            <span id="scene-progress">Scene 1 / 10</span>
+            <span>Hasrat Pasangan: <span id="mood-text" class="mood-text">Membara</span></span>
+        </div>
 
-    <div class="options-container" id="options-container">
-        <!-- Pilihan tombol diisi via JS -->
+        <div id="scene-title" class="scene-title"></div>
+        <div id="story-text" class="story-text"></div>
+        <div id="feedback-box" class="feedback-box"></div>
+
+        <div id="btn-group" class="btn-group"></div>
     </div>
 </div>
 
 <script>
     let currentScene = 0;
-    let feedbackText = "";
-    let terimaCount = 0;
-    let tolakCount = 0;
+    let happyScore = 0;
+    let unhappyScore = 0;
 
-    const gameContent = document.getElementById('game-content');
-    const optionsContainer = document.getElementById('options-container');
-    const progressText = document.getElementById('progress');
-
-    function initGame() {
-        progressText.innerText = "Menu Utama";
-        gameContent.innerHTML = `
-            <div class="story-text" style="text-align: center;">
-                Pilih sudut pandang karakter Anda untuk memulai cerita.
-            </div>
-        `;
-        optionsContainer.innerHTML = `
-            <button class="btn" onclick="startGame('Pria')">1. Saya Pria (Pasangan Wanita)</button>
-            <button class="btn" onclick="startGame('Wanita')">2. Saya Wanita (Pasangan Pria)</button>
-        `;
-    }
-
-    function startGame() {
-        currentScene = 1;
-        terimaCount = 0;
-        tolakCount = 0;
-        feedbackText = "";
-        renderScene();
-    }
-
-    const scenes = {
-        1: {
-            title: "SCENE 1: BISIKAN DI TENGAH HUJAN",
-            text: "Hujan deras mengguyur jendela. Pasanganmu mendekat, membisikkan kata-kata manis tepat di telingamu lalu mencoba merangkul pinggangmu rapat-rapat.",
-            terimaText: "Menerima rangkulannya dan bersandar rapat pada dadanya.",
-            tolakText: "Menolak dengan menahan dadanya lembut, memberinya jarak sejenak.",
-            resTerima: "Kamu membiarkan tubuhmu menyatu dalam kehangatan pelukannya. Napasnya menghembus lega dan penuh ketenangan.",
-            resTolak: "Kamu menahannya. Dia tersenyum menggodamu, tatapan matanya makin penasaran dengan penolakan halusmu."
+    const scenes = [
+        {
+            title: "1. Tantangan Kebenaran di Kamar Remang",
+            image: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=800&auto=format&fit=crop",
+            text: "Lampu kamar sengaja diredupkan. Pasanganmu melempar senyum nakal sambil memegang sebotol minuman. 'Malam ini tidak ada aturan,' bisiknya menantang. 'Setiap kekalahan harus dibayar dengan satu sentuhan intim.'",
+            acceptBtn: "✔ Menerima Tantangan: Tatap matanya tajam dan terima taruhan gila itu.",
+            rejectBtn: "✖ Menolak Tantangan: Minta untuk menikmati malam secara santai tanpa aturan.",
+            happyRes: "Mata pasanganmu berkilat penuh gairah! Ia senang melihat keikutsertaanmu dalam permainan bergairah ini.",
+            unhappyRes: "Ia mendengus kecewa, merasa keberanianmu kurang menantang untuk malam yang membara ini."
         },
-        2: {
-            title: "SCENE 2: SENTUHAN PADA JEMARI",
-            text: "Dia menggenggam jemarimu, mencoba membawanya ke bibirnya untuk memberikan kecupan yang hangat dan intens.",
-            terimaText: "Menerima kecupannya dan membalas menggenggam erat tangannya.",
-            tolakText: "Menolak kecupan itu dengan menarik tangannya perlahan sambil tersenyum.",
-            resTerima: "Bibirnya menyentuh kulitmu lembut. Sensasi hangat seketika menjalar ke seluruh tubuhmu.",
-            resTolak: "Kamu menarik tanganmu. Dia terkekeh pelan, merasa tertantang oleh sikapmu yang jual mahal."
+        {
+            title: "2. Tatapan Menembus Jiwa",
+            image: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=800&auto=format&fit=crop",
+            text: "Ia mendekatkan wajahnya hingga jarak tersisa setipis helai rambut. 'Tatap mataku tanpa berkedip selama 10 detik, atau kamu harus membiarkanku menguasai bibirmu.'",
+            acceptBtn: "✔ Menerima: Tahan tatapannya dengan berani meski napasmu mulai memburu.",
+            rejectBtn: "✖ Menolak: Palingkan wajahmu karena tak kuat menahan magnet gairahnya.",
+            happyRes: "Keberanianmu membuatnya makin liar! Ia meremas pinggangmu rapat-rapat saat jarak hancur sepenuhnya.",
+            unhappyRes: "Ia terkekeh mengejek. 'Baru begitu saja sudah menyerah?' bisiknya sambil meremehkan daya tahanmu."
         },
-        3: {
-            title: "SCENE 3: TATAPAN DAN RELEVANSI TARIKAN",
-            text: "Lampu dimatikan, tersisa remang lilin. Pasanganmu menatap bibirmu dan perlahan mendekatkan wajahnya untuk menciummu.",
-            terimaText: "Menerima ciumannya dan memejamkan mata dalam pasrah.",
-            tolakText: "Menolak ciuman itu dengan memalingkan wajah ke samping.",
-            resTerima: "Bibir kalian menyatu dalam pautan yang dalam dan menggairahkan. Suasana kamar seketika memanas.",
-            resTolak: "Ciumannya mendarat di pipimu. Dia berbisik lirih di telingamu, 'Kamu suka bermain-main malam ini...'"
+        {
+            title: "3. Permainan Es Batu & Sensasi Panas",
+            image: "https://images.unsplash.com/photo-1509114397022-ed747cca3f65?q=80&w=800&auto=format&fit=crop",
+            text: "Ia mengambil sepotong es batu dingin, lalu menempelkannya di bibirnya sendiri sebelum menatap dada dan lehermu yang hangat.",
+            acceptBtn: "✔ Menerima: Biarkan ia menelusurkan es batu dingin itu di sepanjang kulit lehermu.",
+            rejectBtn: "✖ Menolak: Tahan tangannya, menolak sensasi dingin yang mengejutkan.",
+            happyRes: "Sentuhan es berpadu dengan napas panasnya membuat tubuhmu merinding hebat. Ia sangat menikmati erangan halusmu.",
+            unhappyRes: "Ia melempar es batu itu kembali ke gelas. Rasa frustrasi mulai terlihat di raut wajahnya."
         },
-        4: {
-            title: "SCENE 4: PERMINTAAN LELAP",
-            text: "Tangan pasanganmu mulai merambat ke kancing bajumu, berniat membukanya satu per satu untuk mengikis jarak kain di antara kalian.",
-            terimaText: "Menerima tangannya dan membiarkannya melepaskan pakaianmu.",
-            tolakText: "Menolak dan memegang tangannya agar berhenti sejenak.",
-            resTerima: "Pakaian terlepas perlahan. Tatapan matanya penuh kagum melihat keindahan tubuhmu di bawah remang cahaya.",
-            resTolak: "Kamu menghentikan tangannya. Dia mengangguk paham, lalu mengganti fokusnya mengelus rambutmu penuh kesabaran."
+        {
+            title: "4. Ikatan Sutra Lembut",
+            image: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=800&auto=format&fit=crop",
+            text: "Pasanganmu mengeluarkan seutas kain sutra merah. 'Biar aku yang memegang kendali penuh. Biarkan pergelangan tanganmu terikat lembut malam ini.'",
+            acceptBtn: "✔ Menerima: Serahkan kedua tanganmu untuk diikat secara pasrah dan penuh hasrat.",
+            rejectBtn: "✖ Menolak: Gelengkan kepala dan ambil alih posisi untuk menguasainya balik.",
+            happyRes: "Ia mengikatmu dengan telaten, mengecup tiap inci kulitmu saat kamu berada dalam penguasaannya.",
+            unhappyRes: "Rencananya terganggu. Ia sedikit terkejut dengan perlawananmu yang tidak mau dikendalikan."
         },
-        5: {
-            title: "SCENE 5: PIJATAN DAN KEHANGATAN",
-            text: "Dia menawarkan diri untuk mengusap dan memijat punggungmu yang tegang agar suasana menjadi lebih rileks dan mesra.",
-            terimaText: "Menerima tawarannya dan merebahkan diri dalam posisinya.",
-            tolakText: "Menolak pijatannya dan memilih untuk tetap duduk tegak.",
-            resTerima: "Pijatan lembut jemarinya membuat seluruh ketegangan tubuhmu meleleh digantikan gelombang rasa nyaman.",
-            resTolak: "Kamu memilih tetap duduk. Dia mengitarimu dan memilih memangku wajahmu dengan kedua tangannya."
+        {
+            title: "5. Mengurai Penghalang Kain",
+            image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop",
+            text: "Hawa kamar kian membakar. Jemarinya merambat berani ke kancing dan ikatan pakaianmu, menantangmu untuk melucuti seluruh barrier di antara kalian.",
+            acceptBtn: "✔ Menerima: Bantu ia membukanya hingga kulit menyatu tanpa jarak.",
+            rejectBtn: "✖ Menolak: Minta ia melambat dan menikmati sentuhan di atas kain dahulu.",
+            happyRes: "Pelepasan kain disambut dengan desahan puas. Kontak kulit ke kulit seketika membakar seluruh ruangan.",
+            unhappyRes: "Ia menarik tangannya pelan. Kepuasannya tertahan oleh tempo lambat yang kamu minta."
         },
-        6: {
-            title: "SCENE 6: CIUMAN LEHER YANG MENGGODA",
-            text: "Pasanganmu menunduk, mencoba mendaratkan bisikan dan kecupan-kecupan basah di sepanjang garis lehermu.",
-            terimaText: "Menerima sentuhan itu dan mendongakkan kepala memberi akses.",
-            tolakText: "Menolak dengan mendorong bahunya pelan karena merasa terlalu geli.",
-            resTerima: "Desahan halus lolos dari bibirmu saat sentuhannya memicu getaran hebat di sejujur tubuh.",
-            resTolak: "Kamu tertawa dan mendorongnya. Dia tertawa bersama, menikmati momen canda tawa yang intim ini."
+        {
+            title: "6. Bisikan Keinginan Liar",
+            image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=800&auto=format&fit=crop",
+            text: "Dalam posisi yang makin rapat, ia membisikkan fantasi sensual paling vulgar dan berani tepat di daun telingamu, meminta persetujuanmu.",
+            acceptBtn: "✔ Menerima: Bisikkan kembali bahwa kamu menginginkan hal gila itu terjadi.",
+            rejectBtn: "✖ Menolak: Alihkan pembicaraan dengan kecupan langsung di bibirnya.",
+            happyRes: "Persetujuanmu memicu ledakan gairah yang tak tertahankan. Matanya membelalak penuh kemenangan!",
+            unhappyRes: "Meskipun ciumanmu manis, ia merasa kamu menghindari tantangan imajinasi terliarnya."
         },
-        7: {
-            title: "SCENE 7: PERNYATAAN CINTA DI AMBANG HASRAT",
-            text: "Dengan napas yang mulai berpacu, dia menatap matamu dalam-dalam dan meminta komitmenmu untuk menyerahkan malam ini sepenuhnya kepadanya.",
-            terimaText: "Menerima permintaannya dan mengangguk penuh keyakinan.",
-            tolakText: "Menolak berjanji dan memintanya mengikuti alur dengan santai.",
-            resTerima: "Senyum bahagia terukir di wajahnya. Penyatuan emosional kalian terasa makin utuh dan dalam.",
-            resTolak: "Dia tersenyum misterius. Ketiadaan janji justru membuat ikatan malam ini terasa makin menegangkan."
+        {
+            title: "7. Tempo & Kendali Otot",
+            image: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=800&auto=format&fit=crop",
+            text: "Ritme penyatuan makin cepat dan intens. Ia menantangmu untuk menahan gejolak pelepasan gairah agar suasana bertahan lebih lama.",
+            acceptBtn: "✔ Menerima: Tahan napasmu dan ikuti ritme lambat-menitik yang mengandalkan kontrol raga.",
+            rejectBtn: "✖ Menolak: Biarkan gairah meledak cepat tanpa perlu ditahan-tahan lagi.",
+            happyRes: "Ketahanan ragamu membuatnya bergetar hebat. Kenikmatan yang ditahan terasa berlipat ganda!",
+            unhappyRes: "Pelepasan cepat membuat momen permainan ketegangan sensual berakhir terlalu singkat."
         },
-        8: {
-            title: "SCENE 8: PUNCAK RITME KEERSAMAAN",
-            text: "Kehangatan mencapai puncaknya. Dia mengajakmu untuk mempercepat ritme dan membiarkan gairah menguasai kalian berdua.",
-            terimaText: "Menerima ajakannya dan mengikuti ritme gairah tersebut.",
-            tolakText: "Menolak ritme cepat dan memintanya memperlambat gerakan.",
-            resTerima: "Gairah meledak tanpa hambatan, membawa kalian berdua melayang dalam kenikmatan sensual.",
-            resTolak: "Tempo melambat menjadi sangat halus dan sensual, memperpanjang setiap detik kenikmatan yang ada."
+        {
+            title: "8. Puncak Gelora Tanpa Batas",
+            image: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=800&auto=format&fit=crop",
+            text: "Keringat mengkilap melapisi tubuh kalian. Pasanganmu mencengkeram jemarimu erat, berada tepat di ambang puncak gelora paling dahsyat.",
+            acceptBtn: "✔ Menerima: Pasrah total dan serahkan seluruh raga dalam pautan paling dalam.",
+            rejectBtn: "✖ Menolak: Minta jeda sejenak untuk meraup udara karena terlalu intens.",
+            happyRes: "Penyatuan puncak terasa menggelegar! Suara desahan dan detak jantung menyatu dalam harmoni liar.",
+            unhappyRes: "Jeda instan merusak ritme puncaknya, membuatnya harus mengatur napas dengan sedikit gusar."
         },
-        9: {
-            title: "SCENE 9: REBAHAN DALAM PELUKAN",
-            text: "Usai gelombang gairah mereda, pasanganmu merentangkan tangan dan memintamu untuk tidur berpelukan di dadanya sepanjang malam.",
-            terimaText: "Menerima pelukannya dan merapatkan tubuhmu padanya.",
-            tolakText: "Menolak berpelukan erat karena merasa terlalu panas.",
-            resTerima: "Kamu bersandar di dadanya, mendengarkan detak jantungnya yang berangsur teratur hingga matamu berat.",
-            resTolak: "Kamu berbaring berdampingan sambil menggenggam jemarinya, menikmati angin malam yang menyejukkan."
+        {
+            title: "9. Dekapan Sensual Pasca Gelora",
+            image: "https://images.unsplash.com/photo-1509114397022-ed747cca3f65?q=80&w=800&auto=format&fit=crop",
+            text: "Napas berangsur teratur. Pasanganmu merebahkan diri di atas dadamu yang masih naik-turun, menatapmu dengan sisa-sisa tatapan menggoda.",
+            acceptBtn: "✔ Menerima: Peluk tubuh telanjangnya dan mendaratkan ciuman-ciuman kecil di rambutnya.",
+            rejectBtn: "✖ Menolak: Geser tubuhmu pelan karena merasa kegahausan dan ingin minum.",
+            happyRes: "Ia menyusupkan wajahnya di lehermu, merasa sangat dicintai dan dipuaskan secara utuh.",
+            unhappyRes: "Ia merasa diabaikan di momen intim setelah pertarungan gairah yang begitu membara."
         }
-    };
+    ];
 
-    function handleChoice(action) {
-        const scene = scenes[currentScene];
-        if (action === 'terima') {
-            terimaCount++;
-            feedbackText = scene.resTerima;
+    function updateMoodUI() {
+        const moodElem = document.getElementById('mood-text');
+        if (happyScore > unhappyScore + 2) {
+            moodElem.innerText = "Liar & Puas Total";
+            moodElem.style.color = "#4caf50";
+        } else if (unhappyScore > happyScore) {
+            moodElem.innerText = "Terganggu & Frustrasi";
+            moodElem.style.color = "#f44336";
         } else {
-            tolakCount++;
-            feedbackText = scene.resTolak;
-        }
-
-        currentScene++;
-        if (currentScene <= 9) {
-            renderScene();
-        } else {
-            renderEnding();
+            moodElem.innerText = "Bergairah Menantang";
+            moodElem.style.color = "#ff0055";
         }
     }
 
     function renderScene() {
-        const scene = scenes[currentScene];
-        progressText.innerText = `Scene ${currentScene} dari 10`;
+        if (currentScene >= scenes.length) {
+            renderEnding();
+            return;
+        }
 
-        let feedbackHTML = feedbackText ? `<div class="response-text"><b>Respon Pasangan:</b> ${feedbackText}</div>` : '';
+        const data = scenes[currentScene];
+        document.getElementById('scene-progress').innerText = `Scene ${currentScene + 1} / 10`;
+        document.getElementById('scene-img').src = data.image;
+        document.getElementById('scene-title').innerText = data.title;
+        document.getElementById('story-text').innerText = data.text;
+        
+        document.getElementById('feedback-box').style.display = 'none';
 
-        gameContent.innerHTML = `
-            <div class="scene-title">${scene.title}</div>
-            <div class="story-text">${scene.text}</div>
-            ${feedbackHTML}
+        const btnGroup = document.getElementById('btn-group');
+        btnGroup.innerHTML = `
+            <button class="btn btn-accept" onclick="handleChoice('happy')">${data.acceptBtn}</button>
+            <button class="btn btn-reject" onclick="handleChoice('unhappy')">${data.rejectBtn}</button>
         `;
+        
+        updateMoodUI();
+    }
 
-        optionsContainer.innerHTML = `
-            <button class="btn btn-terima" onclick="handleChoice('terima')">✔ MENERIMA: ${scene.terimaText}</button>
-            <button class="btn btn-tolak" onclick="handleChoice('tolak')">✖ MENOLAK: ${scene.tolakText}</button>
+    function handleChoice(type) {
+        const data = scenes[currentScene];
+        const fbBox = document.getElementById('feedback-box');
+        
+        if (type === 'happy') {
+            happyScore++;
+            fbBox.className = "feedback-box fb-happy";
+            fbBox.innerText = "Reaksi Pasangan (Senang):\n" + data.happyRes;
+        } else {
+            unhappyScore++;
+            fbBox.className = "feedback-box fb-unhappy";
+            fbBox.innerText = "Reaksi Pasangan (Tidak Senang):\n" + data.unhappyRes;
+        }
+
+        fbBox.style.display = 'block';
+        updateMoodUI();
+
+        document.getElementById('btn-group').innerHTML = `
+            <button class="btn btn-next" onclick="nextScene()">Lanjut ke Scene Berikutnya ▶</button>
         `;
+    }
+
+    function nextScene() {
+        currentScene++;
+        renderScene();
     }
 
     function renderEnding() {
-        progressText.innerText = "SCENE 10: EPILOG";
+        document.getElementById('scene-progress').innerText = "SCENE 10 / 10";
+        const fbBox = document.getElementById('feedback-box');
+        fbBox.style.display = 'none';
+
         let endingTitle = "";
         let endingText = "";
+        let endingImg = "https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=800&auto=format&fit=crop";
 
-        if (terimaCount >= 7) {
-            endingTitle = "ENDING 1: PASRAH DALAM GELORA (Full Acceptance)";
-            endingText = "Sikapmu yang selalu menerima membuat malam ini berjalan tanpa hambatan. Gairah dan kehangatan menyatu sempurna tanpa ada keraguan sedikit pun. Kalian berdua tenggelam dalam kepuasan fisik dan emosional yang luar biasa.";
-        } else if (tolakCount >= 7) {
-            endingTitle = "ENDING 2: PERMAINAN GODAAN (Playful Tease)";
-            endingText = "Penolakan dan batasan yang sering kamu berikan justru membuat pasanganmu makin penasaran dan bergairah. Malam berakhir dengan rasa penasaran yang membara dan janji permainan yang lebih panas di lain waktu.";
+        if (happyScore >= 7) {
+            endingTitle = "ENDING 1: RULER OF PASSION (Puas Sempurna)";
+            endingText = "Keberanianmu menerima setiap tantangan gila dan vulgar membuat pasanganmu bertekuk lutut. Malam berakhir dengan kepuasan sensual tingkat tertinggi yang pernah kalian rasakan bersama. Ikatan emosi dan fisik kalian membakar sempurna!";
+        } else if (unhappyScore >= 6) {
+            endingTitle = "ENDING 2: UNTAMED TEASE (Gairah Tertahan)";
+            endingText = "Banyaknya penolakan dan instruksi penahanan membuat permainan malam ini terasa dingin dan menggantung. Pasanganmu merasa tertantang namun frustrasi karena gairah liarnya tidak tersalurkan secara maksimal.";
         } else {
-            endingTitle = "ENDING 3: HARMONI DINAMIS (Balanced Game)";
-            endingText = "Kombinasi antara menerima dan menolak membuat alur malam ini sangat berwarna. Ada saatnya kalian berpasrah dalam gairah, dan ada saatnya kalian saling menggoda dengan penolakan manis.";
+            endingTitle = "ENDING 3: SENSUAL GAME (Harmoni Menantang)";
+            endingText = "Kombinasi antara menerima dan menolak membuat alur malam ini penuh lika-liku teka-teki. Ada momen panas yang meledak, namun ada pula ruang permainan yang membuat kalian penasaran untuk mencobanya lagi nanti.";
         }
 
-        gameContent.innerHTML = `
-            <div class="scene-title">SCENE 10: HASIL AKHIR CERITA</div>
-            <div class="story-text">Suara hujan di luar telah reda. Keheningan malam membungkus kalian berdua dalam sisa-sisa kehangatan.</div>
-            <div class="response-text" style="margin-bottom: 12px;">
-                <b>Statistik Pilihan Anda:</b><br>
-                - Menerima: ${terimaCount} kali<br>
-                - Menolak: ${tolakCount} kali
-            </div>
-            <div class="ending-box">
-                <div class="ending-type">${endingTitle}</div>
-                <div class="story-text" style="text-align: center; margin-bottom: 0;">${endingText}</div>
-            </div>
+        document.getElementById('scene-img').src = endingImg;
+        document.getElementById('scene-title').innerText = "10. " + endingTitle;
+        document.getElementById('story-text').innerHTML = `
+            ${endingText}<br><br>
+            <b>Hasil Rekapitulasi Interaksi:</b><br>
+            - Menerima / Senang: <b>${happyScore}</b> kali<br>
+            - Menolak / Tidak Senang: <b>${unhappyScore}</b> kali
         `;
 
-        optionsContainer.innerHTML = `
-            <button class="btn" style="text-align: center;" onclick="initGame()">Mainkan Ulang</button>
+        document.getElementById('btn-group').innerHTML = `
+            <button class="btn btn-next" onclick="restartGame()">Mainkan Ulang Dari Awal ↺</button>
         `;
     }
 
-    initGame();
+    function restartGame() {
+        currentScene = 0;
+        happyScore = 0;
+        unhappyScore = 0;
+        renderScene();
+    }
+
+    renderScene();
 </script>
 </body>
 </html>
