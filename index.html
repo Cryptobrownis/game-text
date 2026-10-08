@@ -46,42 +46,40 @@
         }
         .story-narrative {
             margin-bottom: 20px;
-            padding: 18px;
-            background-color: #171421;
-            border-radius: 14px;
-            border-left: 3px solid #ff3366;
             animation: fadeIn 0.4s ease-out;
+        }
+        .dialogue-card {
+            background-color: #171421;
+            border-radius: 12px;
+            border-left: 3px solid #ff3366;
+            padding: 14px;
+            margin-bottom: 12px;
+        }
+        .dialogue-card p {
+            margin: 0;
             color: #dcdde1;
         }
-        .story-narrative p {
-            margin: 0 0 12px 0;
-        }
-        .story-narrative p:last-child {
-            margin-bottom: 0;
-        }
-        .scene-img {
+        .dialogue-img {
             width: 100%;
-            max-height: 250px;
+            max-height: 220px;
             object-fit: cover;
-            border-radius: 10px;
-            margin-bottom: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
             border: 1px solid #ff3366;
-            display: block;
+            display: none;
         }
-        .upload-btn {
+        .upload-dialog-btn {
             display: inline-block;
-            margin-bottom: 15px;
-            padding: 10px 14px;
+            margin-bottom: 8px;
+            padding: 6px 10px;
             background-color: #261f35;
             color: #ff85a2;
             border: 1px dashed #ff3366;
-            border-radius: 8px;
-            font-size: 0.85em;
-            text-align: center;
+            border-radius: 6px;
+            font-size: 0.78em;
             cursor: pointer;
-            width: 100%;
         }
-        .upload-btn input[type="file"] {
+        .upload-dialog-btn input[type="file"] {
             display: none;
         }
         .reader-choice {
@@ -260,7 +258,7 @@
         },
         scene10: {
             narrative: [
-                "[Scene 10 dari 10 - AKHIR EPISODE 1]",
+                "[S 10 dari 10 - AKHIR EPISODE 1]",
                 "Belum sempat dia menjawab pertanyaanmu, suara gedoran keras tiba-tiba terdengar dari luar pintu kamar!",
                 "*BAM! BAM! BAM!*",
                 "\"Buka pintunya! Aku tahu kalian di dalam!\" histeris suara seorang wanita dari balik pintu, diiringi petir yang menyambar keras di luar.",
@@ -285,23 +283,6 @@
     const storyArea = document.getElementById('story-area');
     const choiceArea = document.getElementById('choice-area');
 
-    function handleImageUpload(event) {
-        const file = event.target.files[0];
-        if (file) {
-            const imageUrl = URL.createObjectURL(file);
-            const activeNarrative = storyArea.querySelector('.story-narrative:last-child');
-            if (activeNarrative) {
-                let imgTag = activeNarrative.querySelector('.scene-img');
-                if (!imgTag) {
-                    imgTag = document.createElement('img');
-                    imgTag.className = 'scene-img';
-                    activeNarrative.prepend(imgTag);
-                }
-                imgTag.src = imageUrl;
-            }
-        }
-    }
-
     function renderNode(nodeId, readerChoiceText = null) {
         const node = storyData[nodeId];
         choiceArea.innerHTML = '';
@@ -314,43 +295,5 @@
         }
 
         setTimeout(() => {
-            const narrativeDiv = document.createElement('div');
-            narrativeDiv.className = 'story-narrative';
-            
-            // Tombol Unggah Foto Galeri per Scene
-            const uploadLabel = document.createElement('label');
-            uploadLabel.className = 'upload-btn';
-            uploadLabel.innerHTML = '📷 Unggah Foto Ilustrasi Scene Ini <input type="file" accept="image/*" onchange="handleImageUpload(event)">';
-            narrativeDiv.appendChild(uploadLabel);
-
-            node.narrative.forEach(paragraph => {
-                const p = document.createElement('p');
-                p.innerText = paragraph;
-                narrativeDiv.appendChild(p);
-            });
-
-            if (nodeId === 'scene10') {
-                const cliffDiv = document.createElement('div');
-                cliffDiv.className = 'cliffhanger-box';
-                cliffDiv.innerText = "— BERSAMBUNG KE EPISODE 2 —";
-                narrativeDiv.appendChild(cliffDiv);
-            }
-
-            storyArea.appendChild(narrativeDiv);
-            storyArea.scrollTop = storyArea.scrollHeight;
-
-            node.choices.forEach(choice => {
-                const btn = document.createElement('button');
-                btn.className = 'choice-btn';
-                btn.innerText = choice.text;
-                btn.onclick = () => renderNode(choice.next, choice.text);
-                choiceArea.appendChild(btn);
-            });
-        }, 300);
-    }
-
-    renderNode('scene1');
-</script>
-
-</body>
-</html>
+            const narrativeContainer = document.createElement('div');
+            narrativeContainer.className = 'story-
