@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Di Malam Itu - Episode 1</title>
+    <title>Satu Malam Tanpa Batas - Episode 1</title>
     <style>
         * { box-sizing: border-box; }
         body {
@@ -58,6 +58,31 @@
         }
         .story-narrative p:last-child {
             margin-bottom: 0;
+        }
+        .scene-img {
+            width: 100%;
+            max-height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ff3366;
+            display: block;
+        }
+        .upload-btn {
+            display: inline-block;
+            margin-bottom: 15px;
+            padding: 10px 14px;
+            background-color: #261f35;
+            color: #ff85a2;
+            border: 1px dashed #ff3366;
+            border-radius: 8px;
+            font-size: 0.85em;
+            text-align: center;
+            cursor: pointer;
+            width: 100%;
+        }
+        .upload-btn input[type="file"] {
+            display: none;
         }
         .reader-choice {
             margin-bottom: 20px;
@@ -122,10 +147,9 @@
 
 <script>
     const storyData = {
-        // SCENE 1
         scene1: {
             narrative: [
-                "[Tatap Muka di Kamar]",
+                "[Scene 1 dari 10 - Tatap Muka di Kamar]",
                 "Hujan deras mengguyur kota sejak senja. Di dalam kamar berlapis dinding kayu ini, hanya ada pendar redup dari lampu meja yang memantulkan bayangan kalian berdua.",
                 "Dia berdiri persis di depan jendela kaca yang berembun, membelakangimu. Gaun tipis yang kamu kenakan terasa sejuk terkena hawa pendingin ruangan.",
                 "\"Kamu tahu... aku seharusnya tidak berada di sini malam ini,\" ucapnya pelan. Suara beratnya bergetar di tengah suara hujan."
@@ -135,8 +159,6 @@
                 { text: "[Duduk di tepi ranjang] 'Kalau mau pergi, pintunya tidak dikunci.'", next: 'scene2_b' }
             ]
         },
-
-        // SCENE 2
         scene2_a: {
             narrative: [
                 "[Scene 2 dari 10 - Pangkas Jarak]",
@@ -159,8 +181,6 @@
                 { text: "[Genggam kerah bajunya] 'Buktikan ucapanmu.'", next: 'scene3' }
             ]
         },
-
-        // SCENE 3
         scene3: {
             narrative: [
                 "[Scene 3 dari 10 - Sentuhan Pertama]",
@@ -172,8 +192,6 @@
                 { text: "[Sandarkan wajah di telapak tangannya] 'Jangan berpikir. Cukup rasakan.'", next: 'scene4' }
             ]
         },
-
-        // SCENE 4
         scene4: {
             narrative: [
                 "[Scene 4 dari 10 - Tarik Ulur Emosi]",
@@ -185,21 +203,17 @@
                 { text: "[Bisikkan kata manja] 'Biarkan membakar sampai habis...'", next: 'scene5' }
             ]
         },
-
-        // SCENE 5
         scene5: {
             narrative: [
                 "[Scene 5 dari 10 - Mengunci Dunia Luar]",
                 "Tanpa melepas tatapannya, tangannya yang lain terulur ke belakang, mematikan sakelar lampu utama. Ruangan seketika tenggelam dalam temaram yang makin pekat.",
                 "Hanya ada suara deru hujan dan hembusan napas kalian yang saling memburu.",
-                "\"Mulai detik ini, dunia di luar tidak lagi ada. Hanya ada kamu dan aku,\" tegasknya rapat."
+                "\"Mulai detik ini, dunia di luar tidak lagi ada. Hanya ada kamu dan aku,\" tegasnya rapat."
             ],
             choices: [
                 { text: "[Rapatkan tubuhmu padanya] 'Genggam aku lebih erat.'", next: 'scene6' }
             ]
         },
-
-        // SCENE 6
         scene6: {
             narrative: [
                 "[Scene 6 dari 10 - Pengakuan Dalam Temaram]",
@@ -211,8 +225,6 @@
                 { text: "[Kecup rahangnya] 'Aku milikmu malam ini.'", next: 'scene7' }
             ]
         },
-
-        // SCENE 7
         scene7: {
             narrative: [
                 "[Scene 7 dari 10 - Ketegangan Puncak]",
@@ -224,8 +236,6 @@
                 { text: "[Meramkan mata dan pasrah]", next: 'scene8' }
             ]
         },
-
-        // SCENE 8
         scene8: {
             narrative: [
                 "[Scene 8 dari 10 - Hambatan Tak Terduga]",
@@ -237,8 +247,6 @@
                 { text: "[Buka mata dan tatap dia] 'Siapa itu?'", next: 'scene9' }
             ]
         },
-
-        // SCENE 9
         scene9: {
             narrative: [
                 "[Scene 9 dari 10 - Rahasia Terkuak]",
@@ -250,8 +258,6 @@
                 { text: "[Tarik tangannya] 'Jawab aku, siapa yang menelepon malam-malam begini?!'", next: 'scene10' }
             ]
         },
-
-        // SCENE 10 (CLIFFHANGER / END OF EPISODE 1)
         scene10: {
             narrative: [
                 "[Scene 10 dari 10 - AKHIR EPISODE 1]",
@@ -265,7 +271,6 @@
                 { text: "BERSAMBUNG KE EPISODE 2", next: 'end' }
             ]
         },
-
         end: {
             narrative: [
                 "Terima kasih telah membaca Episode 1!",
@@ -279,6 +284,23 @@
 
     const storyArea = document.getElementById('story-area');
     const choiceArea = document.getElementById('choice-area');
+
+    function handleImageUpload(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const imageUrl = URL.createObjectURL(file);
+            const activeNarrative = storyArea.querySelector('.story-narrative:last-child');
+            if (activeNarrative) {
+                let imgTag = activeNarrative.querySelector('.scene-img');
+                if (!imgTag) {
+                    imgTag = document.createElement('img');
+                    imgTag.className = 'scene-img';
+                    activeNarrative.prepend(imgTag);
+                }
+                imgTag.src = imageUrl;
+            }
+        }
+    }
 
     function renderNode(nodeId, readerChoiceText = null) {
         const node = storyData[nodeId];
@@ -295,6 +317,12 @@
             const narrativeDiv = document.createElement('div');
             narrativeDiv.className = 'story-narrative';
             
+            // Tombol Unggah Foto Galeri per Scene
+            const uploadLabel = document.createElement('label');
+            uploadLabel.className = 'upload-btn';
+            uploadLabel.innerHTML = '📷 Unggah Foto Ilustrasi Scene Ini <input type="file" accept="image/*" onchange="handleImageUpload(event)">';
+            narrativeDiv.appendChild(uploadLabel);
+
             node.narrative.forEach(paragraph => {
                 const p = document.createElement('p');
                 p.innerText = paragraph;
