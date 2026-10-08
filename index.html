@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Malam Hasrat & Godaan Intim 21+</title>
+    <title>Bisikan Hasrat 21+ - Novel Interaktif</title>
     <style>
         :root {
-            --bg-dark: #08030b;
-            --card-bg: #15081c;
+            --bg-dark: #0a020d;
+            --card-bg: #16061e;
             --accent-pink: #ff0055;
-            --accent-purple: #ab47bc;
-            --text-light: #f8edf9;
-            --text-muted: #b091ba;
-            --btn-accept: rgba(46, 125, 50, 0.45);
-            --btn-reject: rgba(198, 40, 40, 0.45);
-            --border-accept: #4caf50;
-            --border-reject: #ef5350;
+            --accent-purple: #c0392b;
+            --text-light: #fbeefe;
+            --text-muted: #bda2c4;
+            --btn-desah: rgba(213, 0, 249, 0.25);
+            --btn-teriak: rgba(255, 23, 68, 0.3);
+            --border-desah: #d500f9;
+            --border-teriak: #ff1744;
         }
 
         * {
@@ -33,33 +33,33 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 10px;
+            padding: 8px;
         }
 
         .novel-card {
             width: 100%;
-            max-width: 450px;
+            max-width: 440px;
             background-color: var(--card-bg);
-            border: 1px solid #361244;
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 12px 40px rgba(255, 0, 85, 0.2);
+            border: 1px solid #4a1259;
+            border-radius: 22px;
+            padding: 18px;
+            box-shadow: 0 12px 40px rgba(255, 0, 85, 0.25);
             display: flex;
             flex-direction: column;
-            min-height: 88vh;
+            min-height: 90vh;
             justify-content: space-between;
         }
 
         .header {
             text-align: center;
-            border-bottom: 1px solid #361244;
-            padding-bottom: 10px;
-            margin-bottom: 14px;
+            border-bottom: 1px solid #3d1049;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
         }
 
         .title {
-            font-size: 1.15rem;
-            font-weight: 700;
+            font-size: 1.1rem;
+            font-weight: 800;
             color: var(--accent-pink);
             letter-spacing: 1px;
             text-transform: uppercase;
@@ -74,11 +74,11 @@
             padding: 2px 6px;
             border-radius: 4px;
             vertical-align: middle;
-            margin-left: 6px;
+            margin-left: 4px;
         }
 
         .progress-text {
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             color: var(--text-muted);
             margin-top: 4px;
         }
@@ -91,20 +91,30 @@
         }
 
         .scene-title {
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             font-weight: 700;
-            color: var(--accent-purple);
+            color: #e1bee7;
             margin-bottom: 10px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
         .story-text {
             font-size: 0.95rem;
-            line-height: 1.68;
+            line-height: 1.65;
             color: var(--text-light);
             text-align: justify;
             margin-bottom: 12px;
+        }
+
+        .character-dialogue {
+            background: rgba(255, 0, 85, 0.08);
+            border-left: 3px solid var(--accent-pink);
+            padding: 10px 12px;
+            border-radius: 6px;
+            font-style: italic;
+            margin-bottom: 12px;
+            font-size: 0.92rem;
+            color: #ff80ab;
         }
 
         .response-box {
@@ -115,18 +125,9 @@
             margin-top: 8px;
             display: none;
             animation: fadeIn 0.3s ease-in-out;
-        }
-
-        .res-accept {
-            background: rgba(76, 175, 80, 0.15);
-            border: 1px solid var(--border-accept);
-            color: #a5d6a7;
-        }
-
-        .res-reject {
-            background: rgba(239, 83, 80, 0.15);
-            border: 1px solid var(--border-reject);
-            color: #ef9a9a;
+            background: rgba(213, 0, 249, 0.12);
+            border: 1px solid var(--border-desah);
+            color: #f3e5f5;
         }
 
         .btn-container {
@@ -138,7 +139,7 @@
 
         .btn {
             width: 100%;
-            padding: 14px;
+            padding: 13px 14px;
             border-radius: 12px;
             font-size: 0.88rem;
             font-weight: 600;
@@ -147,21 +148,21 @@
             border: 1px solid transparent;
             color: #ffffff;
             transition: transform 0.1s ease;
-            line-height: 1.4;
+            line-height: 1.35;
         }
 
-        .btn-accept {
-            background-color: var(--btn-accept);
-            border-color: var(--border-accept);
+        .btn-desah {
+            background-color: var(--btn-desah);
+            border-color: var(--border-desah);
         }
 
-        .btn-reject {
-            background-color: var(--btn-reject);
-            border-color: var(--border-reject);
+        .btn-teriak {
+            background-color: var(--btn-teriak);
+            border-color: var(--border-teriak);
         }
 
         .btn-next {
-            background-color: var(--accent-purple);
+            background-color: #8e24aa;
             border-color: #e1bee7;
             text-align: center;
         }
@@ -171,7 +172,7 @@
         }
 
         .ending-box {
-            background: rgba(255, 0, 85, 0.1);
+            background: rgba(255, 0, 85, 0.15);
             border: 1px solid var(--accent-pink);
             border-radius: 12px;
             padding: 16px;
@@ -180,7 +181,7 @@
         }
 
         .ending-title {
-            font-size: 1.05rem;
+            font-size: 1rem;
             font-weight: 700;
             color: var(--accent-pink);
             margin-bottom: 8px;
@@ -196,13 +197,14 @@
 
 <div class="novel-card">
     <div class="header">
-        <div class="title">Goda & Hasrat <span class="badge-21">21+</span></div>
-        <div class="progress-text" id="progress-text">Novel Interaktif Dewasa</div>
+        <div class="title">Bicara Hasrat <span class="badge-21">21+</span></div>
+        <div class="progress-text" id="progress-text">Novel Interaktif Direct Dialogue</div>
     </div>
 
     <div class="content-area">
         <div id="scene-title" class="scene-title"></div>
         <div id="story-text" class="story-text"></div>
+        <div id="character-dialogue" class="character-dialogue"></div>
         <div id="response-box" class="response-box"></div>
     </div>
 
@@ -211,89 +213,117 @@
 
 <script>
     let currentScene = 0;
-    let acceptCount = 0;
-    let rejectCount = 0;
+    let moanCount = 0;
+    let screamCount = 0;
 
     const scenes = [
         {
-            title: "Bab 1: Pintu Kamar Yang Terkunci",
-            text: "Lampu kamar diredupkan hingga menyisakan bayangan temaram. Pasanganmu melangkah perlahan mengunci pintu, lalu berbalik dengan gaun sutra tipis yang melekat menggoda di lekuk tubuhnya. 'Malam ini, kamu tidak boleh melarikan diri dariku...' bisiknya dengan tatapan menantang.",
-            acceptText: "♥ Penerimaan: Tarik pinggangnya rapat dan bisikkan bahwa kamu tak berniat kabur.",
-            rejectText: "✖ Penolakan: Silangkan tangan di dada dan minta ia membuktikan godaannya dahulu.",
-            resAccept: "Alur Penerimaan: Senyum nakal terukir di bibirnya. Ia menyusupkan jemarinya ke rambut belakangmu, memangkas habis jarak yang ada.",
-            resReject: "Alur Penolakan: Matanya menyala penuh tantangan. Ia tertawa manja, merasa tertantang oleh sikapmu yang tidak mudah menyerah."
+            title: "Bab 1: Bisikan Percakapan Pertama",
+            text: "Lampu kamar telah dipadamkan. Pasanganmu mendekat, merapatkan tubuhnya di belakangmu hingga hawa panas kulitnya terasa menembus pakaian.",
+            dialogue: "“Malam ini kamu milikku sepenuhnya... Katakan, apa kamu siap merasakan pembalasan cinta dariku?”",
+            optA: "🗣 Respon Desah Pasrah: “Aahh... hhh... iyaa, lakukan sesukamu...”",
+            optB: "🗣 Respon Teriakan Menantang: “Aaahh! Jangan banyak bicara, sentuh aku sekarang!”",
+            resA: "Reaksi Karakter: Ia terkekeh rendah mendengar desahan pasrahmu, lalu menempelkan bibirnya tepat di ceruk lehermu.",
+            resB: "Reaksi Karakter: Tatapannya makin menggelap penuh gairah liar. 'Galak sekali... aku suka!' bisiknya."
         },
         {
-            title: "Bab 2: Bisikan Beracun di Leher",
-            text: "Ia mendekatkan bibirnya tepat di bawah telingamu. Hembusan napas panasnya membuat bulu kudukmu merinding. 'Sensasi dingin di luar tak ada artinya dibandingkan panas yang ingin kubagikan padamu,' gumamnya vulgar.",
-            acceptText: "♥ Penerimaan: Miringkan kepala memberi akses penuh bagi bibirnya untuk menjelajah.",
-            rejectText: "✖ Penolakan: Tahan bahunya pelan, meminta ia tidak terburu-buru membakar suasana.",
-            resAccept: "Alur Penerimaan: Kecupan-kecupan basah mendarat lembut namun intens di sepanjang lehermu, memicu desahan halus yang tak tertahankan.",
-            resReject: "Alur Penolakan: Ia menggigit bibir bawahnya gemas, memperlambat gerakannya sambil mengusap dadamu penuh kesabaran."
+            title: "Bab 2: Kecupan Panas di Leher",
+            text: "Bibir panasnya mulai menjelajah leher dan tengkukmu, menyapu lembut setiap inci kulit halusmu dengan gigitan-gigitan kecil yang membakar.",
+            dialogue: "“Kulitmu hangat sekali... Suara desahanmu membuatku makin gila.”",
+            optA: "🗣 Respon Mengerang Ketagihan: “Eemmh... ngghh... lagii... jangan berhenti di situ...”",
+            optB: "🗣 Respon Teriak Kenikmatan: “Aaaahhh! Gigi kamu... bikin aku gemetar!”",
+            resA: "Reaksi Karakter: Jemarinya meremas pinggangmu erat saat mendengar rintihan ketagihan dari mulutmu.",
+            resB: "Reaksi Karakter: Ia tertawa puas mendengar teriakan manjamu, memperdalam gesekan bibirnya di lehermu."
         },
         {
-            title: "Bab 3: Jejak Jemari Licik",
-            text: "Jemari lentiknya yang hangat mulai merambat turun dari dada menuju kancing dan ikatan pakaianmu, bergerak pelan seolah sedang memainkan instrumen musik yang sensitif.",
-            acceptText: "♥ Penerimaan: Bantu ia melucuti pakaianmu hingga kontak kulit terasa langsung.",
-            rejectText: "✖ Penolakan: Pegang pergelangan tangannya untuk menahan laju jarinya sejenak.",
-            resAccept: "Alur Penerimaan: Pelepasan kain disambut sentuhan kulit ke kulit yang seketika menyebarkan gelombang panas ke seluruh raga.",
-            resReject: "Alur Penolakan: Ia menatap matamu dalam-dalam, lalu memindahkan tangannya untuk meremas lembut tengkukmu."
+            title: "Bab 3: Melucuti Penghalang Pakaian",
+            text: "Tangan dinginnya mulai merambat naik, menyusup ke balik pakaianmu dan melucuti setiap kain yang memisahkan kontak fisik kalian.",
+            dialogue: "“Kain-kain ini cuma mengganggu. Biarkan aku melihat seluruh keindahan ragamu malam ini.”",
+            optA: "🗣 Respon Desah Malu-Malu: “Ahh... nhhh... pelan-pelan... dingin...”",
+            optB: "🗣 Respon Mengerang Pasrah: “Ooohhh... cepat lepaskan semuanya... aku mau sentuhanmu!”",
+            resA: "Reaksi Karakter: 'Dingin ini cuma sebentar, sayang... sebentar lagi tubuhmu akan membara,' bisiknya serak.",
+            resB: "Reaksi Karakter: Dengan sekali sentakan halus, pakaian terlepas dan tubuh kalian menyatu tanpa jarak."
         },
         {
-            title: "Bab 4: Sentuhan Es Batu & Panas Tubuh",
-            text: "Ia mengambil sepotong es batu dingin, menempelkannya sejenak di bibirnya sebelum menatap dadamu yang hangat. 'Mari kita lihat seberapa tahan tubuhmu menerima kontras dingin dan panas ini...'",
-            acceptText: "♥ Penerimaan: Pasrahkan tubuhmu saat es dingin menyapu kulit hangatmu.",
-            rejectText: "✖ Penolakan: Rebut es batu itu dan lemparkan balik godaan dingin ke tubuhnya.",
-            resAccept: "Alur Penerimaan: Lelehan es berpadu napas membara memicu getaran hebat di sejujur raga. Ia sangat menikmati eranganmu.",
-            resReject: "Alur Penolakan: Tindak balikmu membuatnya terperanjat gembira. Pekikan manja lolos saat kamu ganti menguasai jalannya godaan."
+            title: "Bab 4: Sentuhan Sensitif Pertama",
+            text: "Telapak tangannya yang hangat membelai bagian sensitif tubuhmu. Sentuhan lembut itu seketika memicu gelombang getaran ke seluruh jaringan sarafmu.",
+            dialogue: "“Katakan padaku... bagian mana yang paling bikin kamu ketagihan?”",
+            optA: "🗣 Respon Mengerang Halus: “Nggghh... di situ... ahh, sentuh lagi di situ...”",
+            optB: "🗣 Respon Teriak Kenikmatan: “Aaaaaahhh! Panas banget... geli tapi enak!”",
+            resA: "Reaksi Karakter: Ia tersenyum puas dan memutar sentuhan jemarinya di titik yang kamu tunjukkan.",
+            resB: "Reaksi Karakter: Ia makin berani mempercepat ritme belasannya saat mendengar teriakan nikmatmu."
         },
         {
-            title: "Bab 5: Ikatan Sutra Merah",
-            text: "Ia mengeluarkan seutas kain sutra merah lembut. 'Serahkan kendalimu malam ini. Biarkan aku mengikat kedua tanganmu agar kamu hanya bisa menikmati setiap sentuhanku.'",
-            acceptText: "♥ Penerimaan: Serahkan kedua pergelangan tanganmu untuk diikat secara pasrah.",
-            rejectText: "✖ Penolakan: Gelengkan kepala dan balikkan posisi hingga kamu yang berada di atas.",
-            resAccept: "Alur Penerimaan: Ia mengikat pergelangan tanganmu dengan telaten, menatapmu penuh kemenangan dan kepuasan sensual.",
-            resReject: "Alur Penolakan: Dominasi balik darimu membuat napasnya seketika memburu. Matanya membelalak penuh gairah liar."
+            title: "Bab 5: Ciuman Vulgar Membungkam Suara",
+            text: "Ia membalikkan tubuhmu, lalu menatap matamu yang sayu sebelum membungkam bibirmu dengan ciuman yang dalam, basah, dan sangat vulgar.",
+            dialogue: "“Aku mau menelan semua desahan dan eranganmu langsung dari mulutmu...”",
+            optA: "🗣 Respon Desah Dalam Ciuman: “Mmpphh... emmh... hhh... pasrah...”",
+            optB: "🗣 Respon Erangan Agresif: “Nnnmhh! *Menggigit bibirnya balik dengan gairah*”",
+            resA: "Reaksi Karakter: Pautan bibir makin dalam. Lidahnya menjelajah penuh kehangatan yang memabukkan.",
+            resB: "Reaksi Karakter: Gigitan balik darimu meledakkan gairah liarnya. Ia mencengkeram tengkukmu erat."
         },
         {
-            title: "Bab 6: Bisikan Fantasi Liar",
-            text: "Dalam pautan yang kian rapat, ia membisikkan imajinasi sensual paling vulgar dan berani tentang apa yang ingin ia lakukan padamu dalam penyatuan malam ini.",
-            acceptText: "♥ Penerimaan: Bisikkan persetujuanmu dan minta ia mewujudkannya sekarang.",
-            rejectText: "✖ Penolakan: Bungkam bibirnya dengan ciuman dalam untuk mengalihkan kata-kata.",
-            resAccept: "Alur Penerimaan: Persetujuanmu meledakkan gejolak gairah yang tak tertahankan. Ritme penyatuan dimulai dengan sangat intens.",
-            resReject: "Alur Penolakan: Ciuman dalam itu menyerap seluruh napasnya, mengalihkan fantasi verbal menjadi pergerakan raga yang makin dalam."
+            title: "Bab 6: Permainan Sensasi Panas-Dingin",
+            text: "Ia mengambil es batu dingin lalu mengusapkannya ke dada dan perutmu yang hangat, sebelum menyusulnya dengan ciuman napas membara.",
+            dialogue: "“Dingin atau panas? Mana sensasi yang paling bikin kamu menjerit malam ini?”",
+            optA: "🗣 Respon Mengerang Ketagihan: “Aahhh... nggh... campuran keduanya... bikin aku gila!”",
+            optB: "🗣 Respon Teriak Histeris Sensual: “Aaaaaahhh! Dingin banget tapi enak... taruh lagi!”",
+            resA: "Reaksi Karakter: 'Kamu memang ketagihan sensasi ini,' bisiknya sambil menempelkan dadanya ke dadamu.",
+            resB: "Reaksi Karakter: Teriakannya membuat suasana kamar kian membara oleh gairah yang meluap."
         },
         {
-            title: "Bab 7: Harmoni Penyatuan Raga",
-            text: "Kini tak ada lagi jarak atau penghalang. Keringat tipis melapisi kulit saat ritme pergerakan tubuh mulai berpacu mengikuti naluri dasar gairah.",
-            acceptText: "♥ Penerimaan: Ikuti ritme cepat dan agresif yang ia berikan.",
-            rejectText: "✖ Penolakan: Tahan pinggulnya dan minta memperlambat tempo agar sensasi bertahan lama.",
-            resAccept: "Alur Penerimaan: Tempo cepat membawa kalian melayang dalam gelombang kenikmatan sensual yang meluap-luap.",
-            resReject: "Alur Penolakan: Tempo lambat yang sangat halus menciptakan ketegangan sensual yang menyiksa namun sangat nikmat."
+            title: "Bab 7: Awal Penyatuan Raga",
+            text: "Kini tak ada lagi jarak. Penyatuan raga dimulai secara perlahan namun pasti. Gesekan hangat membuat napas kalian berdua berpacu tak teratur.",
+            dialogue: "“Rasa ini... kamu sempit dan hangat sekali. Dengarkan detak jantungku yang berpacu gila.”",
+            optA: "🗣 Respon Desah Dalam: “Ooohhh... ngghh... pelan-pelan... dalam banget...”",
+            optB: "🗣 Respon Teriak Gelora: “Aaaaahhh! Lebih cepat... penuhi aku sekarang!”",
+            resA: "Reaksi Karakter: Ia memandu ritme awal dengan gerakan halus namun menghujam dalam.",
+            resB: "Reaksi Karakter: Permintaanmu disambut genjot gairah yang makin intens dan agresif."
         },
         {
-            title: "Bab 8: Ujian Ketahanan Sensual",
-            text: "Sensasi panas membakar di ambang batas. Ia menatap matamu tajam di tengah gesekan raga, menantangmu untuk menahan pelepasan gairah sedikit lebih lama.",
-            acceptText: "♥ Penerimaan: Tahan napasmu dan ikuti permainan kontrol ketahanan raga.",
-            rejectText: "✖ Penolakan: Biarkan pelepasan terjadi tanpa perlu menahannya lagi.",
-            happyRes: "Alur Penerimaan: Ketahanan ragamu membuat tubuhnya bergetar hebat. Kenikmatan yang ditahan terasa berlipat ganda!",
-            resReject: "Alur Penolakan: Pelepasan instan meledakkan kepuasan mendadak yang membuat kalian berdua terengah-engah pasrah."
+            title: "Bab 8: Tempian Ritme Liar",
+            text: "Ritme pergerakan tubuh makin berpacu kencang. Suara hembusan napas dan gesekan raga membumbungi ruang remang yang panas.",
+            dialogue: "“Lihat aku! Katakan siapa yang paling bikin kamu teriak kenikmatan malam ini?!”",
+            optA: "🗣 Respon Mengerang Ketagihan: “Cuma kamu... ngghh... cuma kamu yang bisa bikin begini!”",
+            optB: "🗣 Respon Teriak Puncak: “Aaaaahhh! Kamu... kamu gila... enakkk banget!”",
+            resA: "Reaksi Karakter: Pengakuanmu membuat pergerakan tubuhnya makin perkasa tanpa ampun.",
+            resB: "Reaksi Karakter: Teriakan kepuasanmu membakar egonya hingga ritme bergerak makin liar."
         },
         {
-            title: "Bab 9: Puncak Gelora Tanpa Batas",
-            text: "Puncak kehangatan menyapu seluruh raga secara menggelegar. Suara desahan dan pautan erat jemari menjadi saksi penyatuan paling dalam malam ini.",
-            acceptText: "♥ Penerimaan: Peluk tubuhnya sekuat tenaga dalam gejolak puncak.",
-            rejectText: "✖ Penolakan: Biarkan tubuh pasrah terkulai menikmati sisa gelombang gairah.",
-            resAccept: "Alur Penerimaan: Pelukan erat di momen puncak menyatukan jiwa dan fisik dalam kebahagiaan sensual yang sempurna.",
-            resReject: "Alur Penolakan: Kepasrahan total membuat tubuh kalian rileks sepenuhnya saat detak jantung perlahan berangsur teratur."
+            title: "Bab 9: Ambang Batas Puncak Hasrat",
+            text: "Kehangatan luar biasa menumpuk di area vital. Keringat mengkilap menyelimuti tubuh kalian yang saling berpautan erat.",
+            dialogue: "“Aku sudah di batas akhir... Jangan tahan desahanmu lagi, keluarkan semuanya!”",
+            optA: "🗣 Respon Desah Rintihan: “Ahhh... ahhh... sedikit lagii... jangan berhenti...”",
+            optB: "🗣 Respon Teriak Nikmat: “AAAAAHHH! Bersama... ayo keluar barengan!”",
+            resA: "Reaksi Karakter: Rintihan halusmu mendorong ketahanannya ke ambang pelepasan mutlak.",
+            resB: "Reaksi Karakter: Ajakannya disambut dorongan terakhir yang sangat bertenaga."
         },
         {
-            title: "Bab 10: Dekapan & Sisa Kehangatan",
-            text: "Deru napas berangsur tenang di bawah remang lampu. Ia merebahkan kepalanya di dadamu, menatapmu dengan sisa-sisa tatapan penuh kehangatan dan cinta.",
-            acceptText: "♥ Penerimaan: Selimuti tubuh kalian berdua dan tarik ia ke dalam pelukan hangat.",
-            rejectText: "✖ Penolakan: Kecup keningnya lembut lalu berbaring berdampingan sambil menggenggam jemarinya.",
-            resAccept: "Alur Penerimaan: Ia menyusupkan wajahnya di lehermu, merasa sangat dilindungi dan dipuaskan secara utuh.",
-            resReject: "Alur Penolakan: Sambil menggenggam jemarimu erat, ia tersenyum menikmati kedamaian malam yang membungkus kalian."
+            title: "Bab 10: Ledakan Pelepasan Bersama",
+            text: "Gejolak puncak meledak hebat! Gelombang kenikmatan menyapu seluruh raga saat pelepasan gairah terjadi secara bersamaan.",
+            dialogue: "“AAAAHHH! Terima kasih untuk malam gila ini...!”",
+            optA: "🗣 Respon Pasrah Terkulai: “Nggghhh... oohhh... lemas... puas banget...”",
+            optB: "🗣 Respon Teriak Kepuasan: “AAAAAHHHH! Gilasss... aku meleleh!”",
+            resA: "Reaksi Karakter: Tubuhnya terkulai di atasmu, menjatuhkan bobotnya dengan hembusan napas lega.",
+            resB: "Reaksi Karakter: Ia memelukmu sekuat tenaga dalam getaran sisa pelepasan yang dahsyat."
+        },
+        {
+            title: "Bab 11: Dekapan Sisa Kehangatan",
+            text: "Detak jantung yang berpacu perlahan mulai melambat. Ia merebahkan kepalanya di dadamu yang naik turun tidak teratur.",
+            dialogue: "“Suara erangan dan teriakanmu masih bergema di telingaku... Kamu luar biasa.”",
+            optA: "🗣 Respon Bisikan Manja: “Peluk aku erat-erat... jangan lepas dulu...”",
+            optB: "🗣 Respon Kecupan Bisik: “Kamu juga... bikin aku nggak bisa jalan besok...”",
+            resA: "Reaksi Karakter: Ia menarik selimut menyelimuti tubuh kalian berdua, mempererat pautan lengan.",
+            resB: "Reaksi Karakter: Ia terkekeh gemas lalu mengecup dahi dan bibirmu berulang kali."
+        },
+        {
+            title: "Bab 12: Epilog Penutup Malam",
+            text: "Hujan di luar kembali turun menyisakan keheningan yang damai. Malam sensual ini terukir indah sebagai kenangan gairah tak terlupakan.",
+            dialogue: "“Malam ini sudah berakhir... tapi besok malam, aku mau mendengar suara teriakan kenikmatanmu lagi.”",
+            optA: "🗣 Respon Janji Manis: “Iya... aku bakal tunggu malam besok...”",
+            optB: "🗣 Respon Bisikan Tantangan: “Asal kamu bisa bikin aku lebih ketagihan dari malam ini...”",
+            resA: "Reaksi Karakter: Ia tersenyum lembut dan mengecup keningmu hingga kalian berdua tertidur lelap.",
+            resB: "Reaksi Karakter: Matanya berbinar menanti tantangan berikutnya sebelum memelukmu erat."
         }
     ];
 
@@ -307,12 +337,13 @@
         document.getElementById('progress-text').innerText = `Bab ${currentScene + 1} dari ${scenes.length}`;
         document.getElementById('scene-title').innerText = data.title;
         document.getElementById('story-text').innerText = data.text;
+        document.getElementById('character-dialogue').innerText = data.dialogue;
         document.getElementById('response-box').style.display = 'none';
 
         const btnContainer = document.getElementById('btn-container');
         btnContainer.innerHTML = `
-            <button class="btn btn-accept" onclick="handleChoice('accept')">${data.acceptText}</button>
-            <button class="btn btn-reject" onclick="handleChoice('reject')">${data.rejectText}</button>
+            <button class="btn btn-desah" onclick="handleChoice('moan')">${data.optA}</button>
+            <button class="btn btn-teriak" onclick="handleChoice('scream')">${data.optB}</button>
         `;
     }
 
@@ -320,21 +351,19 @@
         const data = scenes[currentScene];
         const resBox = document.getElementById('response-box');
 
-        if (type === 'accept') {
-            acceptCount++;
-            resBox.className = "response-box res-accept";
-            resBox.innerText = data.resAccept || data.happyRes;
+        if (type === 'moan') {
+            moanCount++;
+            resBox.innerText = data.resA;
         } else {
-            rejectCount++;
-            resBox.className = "response-box res-reject";
-            resBox.innerText = data.resReject;
+            screamCount++;
+            resBox.innerText = data.resB;
         }
 
         resBox.style.display = 'block';
 
         const btnContainer = document.getElementById('btn-container');
         btnContainer.innerHTML = `
-            <button class="btn btn-next" onclick="nextScene()">Lanjutkan Cerita ▶</button>
+            <button class="btn btn-next" onclick="nextScene()">Lanjutkan Percakapan ▶</button>
         `;
     }
 
@@ -344,45 +373,46 @@
     }
 
     function renderEnding() {
-        document.getElementById('progress-text').innerText = "EPILOG / HASIL AKHIR CERITA";
-        const resBox = document.getElementById('response-box');
-        resBox.style.display = 'none';
+        document.getElementById('progress-text').innerText = "EPILOG / HASIL PERMAINAN HASRAT";
+        document.getElementById('response-box').style.display = 'none';
+        document.getElementById('character-dialogue').style.display = 'none';
 
         let endingTitle = "";
         let endingText = "";
 
-        if (acceptCount >= 7) {
-            endingTitle = "ENDING 1: PASRAH DALAM GELORA (Full Acceptance)";
-            endingText = "Dominasi pilihan penerimaan membuat malam ini terbakar dalam gelora vulgar tanpa hambatan. Setiap godaan liar disambut dengan kepasrahan raga yang sempurna. Kalian berdua tenggelam dalam puncak kepuasan fisik dan emosional tingkat tertinggi.";
-        } else if (rejectCount >= 7) {
-            endingTitle = "ENDING 2: PERMAINAN GODAAN DINGIN (High Rejection / Tease)";
-            endingText = "Penolakan dan batasan yang sering kamu berikan justru membuat pasanganmu makin penasaran dan frustrasi gairah. Malam berakhir dengan permainan godaan yang menahan kepuasan, menyisakan rasa penasaran mendalam untuk pertempuran intim berikutnya.";
+        if (moanCount >= 8) {
+            endingTitle = "ENDING 1: PASRAH DALAM DESAHAN SUCI (Full Moan / Submissive)";
+            endingText = "Dominasi suara desahan pasrah dan rintihan halusmu membuat malam ini dipenuhi kelembutan sensual yang mendalam. Karakter novel sangat menikmati kepasrahan ragamu dan tertidur dalam pelukan pelindung yang hangat.";
+        } else if (screamCount >= 8) {
+            endingTitle = "ENDING 2: TERIAKAN GAIRAH LIAR (Full Scream / Wild Desire)";
+            endingText = "Dominasi teriakan nikmat dan erangan ketagihanmu membuat malam ini terbakar dalam kegilaan fisik tanpa batas! Kamu berhasil membakar ego sensual karakter hingga permainan berlangsung sangat agresif dan memuaskan.";
         } else {
-            endingTitle = "ENDING 3: HARMONI GODAAN & HASRAT (Mixed Choice Ending)";
-            endingText = "Kombinasi seimbang antara penerimaan dan penolakan menciptakan dinamika sensual yang sangat kaya. Ada saatnya kamu pasrah menikmati godaan vulgar, dan ada saatnya kamu mengambil kendali dengan penolakan manis. Malam berakhir dengan harmoni gairah yang sempurna.";
+            endingTitle = "ENDING 3: HARMONI DESAH & TERIAKAN (Mixed Dynamic)";
+            endingText = "Kombinasi antara desahan pasrah dan teriakan kenikmatan menciptakan simfoni percakapan sensual yang sempurna. Ada saatnya kamu lembut terbuai, dan ada saatnya kamu meledak dalam teriakan nikmat.";
         }
 
-        document.getElementById('scene-title').innerText = "BAB AKHIR: EPILOG MALAM";
+        document.getElementById('scene-title').innerText = "HASIL AKHIR INTERAKSI";
         document.getElementById('story-text').innerHTML = `
-            Suara hujan di luar telah reda, menyisakan keheningan malam yang damai membungkus kalian berdua.<br><br>
+            Percakapan intim 12 bab telah usai dengan kehangatan sempurna.<br><br>
             <div class="ending-box">
                 <div class="ending-title">${endingTitle}</div>
-                <div style="font-size: 0.92rem; line-height: 1.5;">${endingText}</div>
+                <div style="font-size: 0.9rem; line-height: 1.5;">${endingText}</div>
             </div><br>
-            <b>Rekapitulasi Keputusan Anda:</b><br>
-            - Keputusan Penerimaan: <b>${acceptCount}</b> kali<br>
-            - Keputusan Penolakan: <b>${rejectCount}</b> kali
+            <b>Statistik Respon Suara Anda:</b><br>
+            - Respon Desah / Rintihan Pasrah: <b>${moanCount}</b> kali<br>
+            - Respon Teriak Nikmat / Ketagihan: <b>${screamCount}</b> kali
         `;
 
         document.getElementById('btn-container').innerHTML = `
-            <button class="btn btn-next" onclick="restartStory()">Baca Ulang Novel ↺</button>
+            <button class="btn btn-next" onclick="restartStory()">Mainkan Ulang Novel ↺</button>
         `;
     }
 
     function restartStory() {
         currentScene = 0;
-        acceptCount = 0;
-        rejectCount = 0;
+        moanCount = 0;
+        screamCount = 0;
+        document.getElementById('character-dialogue').style.display = 'block';
         renderScene();
     }
 
