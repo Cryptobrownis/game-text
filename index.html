@@ -258,7 +258,7 @@
         },
         scene10: {
             narrative: [
-                "[S 10 dari 10 - AKHIR EPISODE 1]",
+                "[Scene 10 dari 10 - AKHIR EPISODE 1]",
                 "Belum sempat dia menjawab pertanyaanmu, suara gedoran keras tiba-tiba terdengar dari luar pintu kamar!",
                 "*BAM! BAM! BAM!*",
                 "\"Buka pintunya! Aku tahu kalian di dalam!\" histeris suara seorang wanita dari balik pintu, diiringi petir yang menyambar keras di luar.",
@@ -296,4 +296,62 @@
 
         setTimeout(() => {
             const narrativeContainer = document.createElement('div');
-            narrativeContainer.className = 'story-
+            narrativeContainer.className = 'story-narrative';
+
+            node.narrative.forEach((text) => {
+                const card = document.createElement('div');
+                card.className = 'dialogue-card';
+
+                const img = document.createElement('img');
+                img.className = 'dialogue-img';
+
+                const uploadLabel = document.createElement('label');
+                uploadLabel.className = 'upload-dialog-btn';
+                uploadLabel.innerHTML = '📷 Tambah Foto <input type="file" accept="image/*">';
+
+                const fileInput = uploadLabel.querySelector('input');
+                fileInput.onchange = (e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                        img.src = URL.createObjectURL(file);
+                        img.style.display = 'block';
+                        uploadLabel.innerHTML = '🔄 Ganti Foto <input type="file" accept="image/*">';
+                        // pasang event listener baru untuk tombol ganti foto
+                        uploadLabel.querySelector('input').onchange = fileInput.onchange;
+                    }
+                };
+
+                const p = document.createElement('p');
+                p.innerText = text;
+
+                card.appendChild(img);
+                card.appendChild(uploadLabel);
+                card.appendChild(p);
+                narrativeContainer.appendChild(card);
+            });
+
+            if (nodeId === 'scene10') {
+                const cliffDiv = document.createElement('div');
+                cliffDiv.className = 'cliffhanger-box';
+                cliffDiv.innerText = "— BERSAMBUNG KE EPISODE 2 —";
+                narrativeContainer.appendChild(cliffDiv);
+            }
+
+            storyArea.appendChild(narrativeContainer);
+            storyArea.scrollTop = storyArea.scrollHeight;
+
+            node.choices.forEach(choice => {
+                const btn = document.createElement('button');
+                btn.className = 'choice-btn';
+                btn.innerText = choice.text;
+                btn.onclick = () => renderNode(choice.next, choice.text);
+                choiceArea.appendChild(btn);
+            });
+        }, 300);
+    }
+
+    renderNode('scene1');
+</script>
+
+</body>
+</html>
